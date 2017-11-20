@@ -19,7 +19,7 @@ public class Utils {
 		// Iterate over all lists
 		while (listIndex < initialList.size()) {
 			curList = initialList.get(listIndex);
-			resList = merge(resList, curList);
+			resList = merge2(resList, curList);
 			listIndex++;
 		}
 		return resList;
@@ -82,4 +82,39 @@ public class Utils {
 		}
 		return newList;
 	}
+
+	// https://stackoverflow.com/questions/5958169/how-to-merge-two-sorted-arrays-into-a-sorted-array
+	private List<Integer> merge2(List<Integer> a, List<Integer> b) {
+
+		if (a == null || b == null) {
+			throw new RuntimeException("Not valid data!");
+		}
+
+		List<Integer> newList = new ArrayList<>();
+
+		int i = 0;
+		int j = 0;
+
+		while (i < a.size() && j < b.size()) {
+			if (a.get(i) < b.get(j)) {
+				newList.add(a.get(i));
+				i++;
+			} else {
+				newList.add(b.get(j));
+				j++;
+			}
+		}
+
+		while (i < a.size()) {
+			newList.add(a.get(i));
+			i++;
+		}
+
+		while (j < b.size()) {
+			newList.add(b.get(j));
+			j++;
+		}
+		return newList;
+	}
+
 }
